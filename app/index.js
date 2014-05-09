@@ -22,15 +22,21 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
     // have Yeoman greet the user
     this.log(this.yeoman);
 
-    // replace it with a short and sweet description of your generator
-    this.log(chalk.magenta('You\'re using the fantastic Polunware generator.'));
-
     var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
+      type: 'checkbox',
+      name: 'environments',
+      message: 'What type of project is this?',
+      choices: [
+        'node',
+        'frontend'
+      ]
     }];
+
+    this.package = {name: 'test',
+                    author: 'max',
+                    licence: 'ISC',
+                    node:false,
+                    frontend: true}
 
     this.prompt(prompts, function (props) {
       this.someOption = props.someOption;
@@ -40,16 +46,17 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
   },
 
   app: function () {
-    this.mkdir('app');
-    this.mkdir('app/templates');
+    this.mkdir('app')
+    this.mkdir('app/templates')
 
-    this.copy('_package.json', 'package.json');
-    this.copy('_bower.json', 'bower.json');
+    this.template('_package.json', 'package.json')
+    this.template('_bower.json', 'bower.json')
   },
 
   projectfiles: function () {
-    this.copy('editorconfig', '.editorconfig');
-    this.copy('jshintrc', '.jshintrc');
+    this.copy('editorconfig', '.editorconfig')
+    this.copy('eslint.json', 'config/eslint.json')
+    this.copy('tern-project', '.tern-project')
   }
 });
 
