@@ -13,10 +13,7 @@ describe('polunware generator', function () {
 
       this.app = helpers.createGenerator('polunware:app', [
         '../../app'
-      ]);
-      helpers.mockPrompt(this.app, {
-        'someOption': true
-      });
+      ])
       this.app.options['skip-install'] = true;
       done();
     }.bind(this));
@@ -27,15 +24,35 @@ describe('polunware generator', function () {
       // add files you expect to exist here.
       'config/eslint.json',
       '.editorconfig',
-      '.tern-project'
+      '.tern-project',
+      'Gruntfile.json'
     ];
-    
+
+    helpers.mockPrompt(this.app, {
+      userName: 'test',
+      packageName: 'testpackage',
+      licence: 'ISC',
+      environments: {
+        node: true,
+        frontend: true
+      }
+    })
+
     this.app.run({}, function () {
       helpers.assertFile(expected);
       done();
     })
   })
   it('creates a valid package.json', function(done){
+    helpers.mockPrompt(this.app, {
+      userName: 'test',
+      packageName: 'testpackage',
+      licence: 'ISC',
+      environments: {
+        node: true,
+        frontend: true
+      }
+    })
     this.app.run({}, function(){
       var file = fs.readFileSync('package.json')
       JSON.parse(file)

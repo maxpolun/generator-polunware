@@ -1,9 +1,10 @@
-'use strict';
-var util = require('util');
-var path = require('path');
-var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-
+'use strict'
+var util = require('util'),
+    path = require('path'), 
+    yeoman = require('yeoman-generator'),
+    chalk = require('chalk'),
+    spawn = require('child_process').spawn,
+    concat = require('concat-stream')
 
 var PolunwareGenerator = yeoman.generators.Base.extend({
   init: function () {
@@ -16,6 +17,15 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
     });
   },
 
+  getName: function(){
+    var done = this.async()
+    var git = spawn('git', ['config', 'user.name'])
+    git.stdout.pipe(concat(function(data){
+      this.userName = data
+    }.bind(this)))
+    git.on('close', done)
+  },
+
   askFor: function () {
     var done = this.async();
 
@@ -23,6 +33,21 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
     this.log(this.yeoman);
 
     var prompts = [{
+      type: 'input',
+      name: 'userName',
+      message: 'What\'s your name?',
+      default: this.userName
+    },{
+      type: 'input',
+      name: 'packageName',
+      message: 'What\'s the package name?',
+      default: path.basename(process.cwd())
+    },{
+      type: 'input',
+      name: 'licence',
+      message: 'What\'s the package licence?',
+      default: 'ISC'
+    },{
       type: 'checkbox',
       name: 'environments',
       message: 'What type of project is this?',
@@ -32,14 +57,12 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
       ]
     }];
 
-    this.package = {name: 'test',
-                    author: 'max',
-                    licence: 'ISC',
-                    node:false,
-                    frontend: true}
-
     this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
+      this.package = {name: props.name,
+                      author: props.userName,
+                      licence: props.licence,
+                      node: props.environments.node,
+                      frontend: props.environments.frontend}
 
       done();
     }.bind(this));
@@ -51,6 +74,7 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
 
     this.template('_package.json', 'package.json')
     this.template('_bower.json', 'bower.json')
+    this.template('_Gruntfile.js', 'Gruntfile.js')
   },
 
   projectfiles: function () {

@@ -25,7 +25,8 @@
   "dependencies": {
     "yeoman-generator": "~0.16.0",
     "chalk": "~0.4.0",
-    "async": "^0.8.0"
+    "async": "^0.8.0",
+    "concat-stream": "^1.4.5"
   },
   "devDependencies": {
     "mocha": "*"
