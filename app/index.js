@@ -82,6 +82,7 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
     this.copy('eslint.json', 'config/eslint.json')
     this.copy('eslint-specs.json', 'config/eslint-specs.json')
     this.copy('tern-project', '.tern-project')
+    this.copy('gitignore', '.gitignore')
   }
 });
 

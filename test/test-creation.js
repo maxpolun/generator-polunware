@@ -26,7 +26,8 @@ describe('polunware generator', function () {
       'config/eslint-specs.json',
       '.editorconfig',
       '.tern-project',
-      'Gruntfile.js'
+      'Gruntfile.js',
+      '.gitignore'
     ];
 
     helpers.mockPrompt(this.app, {
