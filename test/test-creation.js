@@ -23,9 +23,10 @@ describe('polunware generator', function () {
     var expected = [
       // add files you expect to exist here.
       'config/eslint.json',
+      'config/eslint-specs.json',
       '.editorconfig',
       '.tern-project',
-      'Gruntfile.json'
+      'Gruntfile.js'
     ];
 
     helpers.mockPrompt(this.app, {
