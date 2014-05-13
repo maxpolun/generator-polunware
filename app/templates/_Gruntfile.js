@@ -107,7 +107,8 @@ module.exports = function(grunt) {
 <% if (package.frontend) { %>
   grunt.loadNpmTasks('grunt-contrib-jasmine')
   grunt.loadNpmTasks('grunt-browserify')
-
+<% } %>
+<% if (package.frontend && !package.node) { %>
   grunt.registerTask('default', ['watch:frontEnd'])
 <% } %>
 <% if (package.node) { %>

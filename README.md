@@ -2,45 +2,19 @@
 
 > [Yeoman](http://yeoman.io) generator
 
+## What is it?
 
-## Getting Started
+This was originally written for my use, to help cut down on project startup time for my personal projects, but I figured I'd put it out there since there's no generators that really have what I want.
 
-### What is Yeoman?
+This can generate for a front-end project, a backend project, or a project that has both.
 
-Trick question. It's not a thing. It's this guy:
+On the front-end it uses browserify and bower. On the back end it uses bluebird/express/postgres. Jasmine tests are used for both front and back-end. Grunt is the build tool.
 
-![](http://i.imgur.com/JHaAlBJ.png)
+## Getting it running
 
-Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
+Install it globally using ```npm install -g generator-polunware.```
 
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
-
-```
-$ npm install -g yo
-```
-
-### Yeoman Generators
-
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
-
-To install generator-polunware from npm, run:
-
-```
-$ npm install -g generator-polunware
-```
-
-Finally, initiate the generator:
-
-```
-$ yo polunware
-```
-
-### Getting To Know Yeoman
-
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
-
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
-
+run ```yo polunware``` and answer the questions
 
 ## License
 
