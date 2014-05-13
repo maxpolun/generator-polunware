@@ -15,6 +15,10 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
         this.installDependencies();
       }
     });
+
+    this.on('error', function (err){
+      console.error(err)
+    })
   },
 
   getName: function(){
