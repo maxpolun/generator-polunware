@@ -1,6 +1,6 @@
 {
   "name": "generator-polunware",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Yeoman generator",
   "license": "ISC",
   "main": "app/index.js",
@@ -20,7 +20,8 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "polunware"
   ],
   "dependencies": {
     "yeoman-generator": "~0.16.0",
