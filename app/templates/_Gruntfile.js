@@ -70,9 +70,10 @@ module.exports = function(grunt) {
         alias: []
       }
     }
+  }
 <% } %>
 
-  grunt.eslint = {
+  config.eslint = {
     code: {
       files: config.allCodeFiles,
       options: 'config/eslint.json'
@@ -107,7 +108,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine')
   grunt.loadNpmTasks('grunt-browserify')
 
-  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('default', ['watch:frontEnd'])
 <% } %>
 <% if (package.node) { %>
   grunt.loadNpmTasks('grunt-nodemon')
@@ -122,6 +123,6 @@ module.exports = function(grunt) {
     jasmineLib.executeSpecs(this.data)
   })
 
-  grunt.registerTask('default', ['concurrent:dev']);
+  grunt.registerTask('default', ['concurrent:dev'])
 <% } %>
 }
