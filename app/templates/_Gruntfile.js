@@ -29,7 +29,7 @@ module.exports = function(grunt) {
       options: {
         nodeArgs: ['--debug']
       }
-    }
+    },
     options: {
       ignore: ['app/**', '<%%= specfiles %>', '.grunt/**']
     }

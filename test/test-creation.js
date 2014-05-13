@@ -34,10 +34,10 @@ describe('polunware generator', function () {
       userName: 'test',
       packageName: 'testpackage',
       licence: 'ISC',
-      environments: {
-        node: true,
-        frontend: true
-      }
+      environments: [
+        'node', 
+        'frontend'
+      ]
     })
 
     this.app.run({}, function () {
@@ -50,10 +50,10 @@ describe('polunware generator', function () {
       userName: 'test',
       packageName: 'testpackage',
       licence: 'ISC',
-      environments: {
-        node: true,
-        frontend: true
-      }
+      environments: [
+        'node', 
+        'frontend'
+      ]
     })
     this.app.run({}, function(){
       var file = fs.readFileSync('package.json')

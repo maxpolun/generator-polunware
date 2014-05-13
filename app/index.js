@@ -21,7 +21,7 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
     var done = this.async()
     var git = spawn('git', ['config', 'user.name'])
     git.stdout.pipe(concat(function(data){
-      this.userName = data
+      this.userName = data.toString()
     }.bind(this)))
     git.on('close', done)
   },
@@ -36,7 +36,7 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
       type: 'input',
       name: 'userName',
       message: 'What\'s your name?',
-      default: this.userName
+      default: this.userName.replace(/\s+$/, '')
     },{
       type: 'input',
       name: 'packageName',
@@ -58,12 +58,13 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
     }];
 
     this.prompt(prompts, function (props) {
-      this.package = {name: props.name,
+      console.log(props)
+      this.package = {name: props.packageName,
                       author: props.userName,
                       licence: props.licence,
-                      node: props.environments.node,
-                      frontend: props.environments.frontend}
-
+                      node: props.environments.indexOf('node') >= 0,
+                      frontend: props.environments.indexOf('frontend') >= 0}
+      console.log(this.package)
       done();
     }.bind(this));
   },
