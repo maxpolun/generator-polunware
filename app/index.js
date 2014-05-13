@@ -58,24 +58,24 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
     }];
 
     this.prompt(prompts, function (props) {
-      console.log(props)
       this.package = {name: props.packageName,
                       author: props.userName,
                       licence: props.licence,
                       node: props.environments.indexOf('node') >= 0,
                       frontend: props.environments.indexOf('frontend') >= 0}
-      console.log(this.package)
       done();
     }.bind(this));
   },
 
   app: function () {
-    this.mkdir('app')
-    this.mkdir('app/templates')
-
     this.template('_package.json', 'package.json')
-    this.template('_bower.json', 'bower.json')
     this.template('_Gruntfile.js', 'Gruntfile.js')
+    if(this.package.node) {
+      this.template('_server.js', 'server.js')
+    }
+    if(this.package.frontend) {
+      this.template('_bower.json', 'bower.json')
+    }
   },
 
   projectfiles: function () {

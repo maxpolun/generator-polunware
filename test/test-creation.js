@@ -27,7 +27,8 @@ describe('polunware generator', function () {
       '.editorconfig',
       '.tern-project',
       'Gruntfile.js',
-      '.gitignore'
+      '.gitignore',
+      'server.js'
     ];
 
     helpers.mockPrompt(this.app, {
