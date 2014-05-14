@@ -75,12 +75,20 @@ module.exports = function(grunt) {
 
   config.eslint = {
     code: {
-      files: config.allCodeFiles,
-      options: 'config/eslint.json'
+      files: {
+        src: config.allCodeFiles,
+      },
+      options: {
+        config: 'config/eslint.json'
+      }
     },
     specs: {
-      files: config.allSpecFiles,
-      options: 'config/eslint-specs.json'
+      files: {
+        src: config.allSpecFiles,
+      },
+      options: {
+        config: 'config/eslint-specs.json'
+      }
     }
   }
 
