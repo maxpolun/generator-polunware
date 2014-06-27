@@ -7,6 +7,7 @@
     "globals":{
         "describe": true,
         "it": true,
+        "pit": true,
         "beforeEach": true,
         "afterEach": true,
         "jasmine": true,

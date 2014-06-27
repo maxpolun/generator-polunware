@@ -2,10 +2,21 @@
 module.exports = function(grunt) {
   var config = {}
   config.pkg = grunt.file.readJSON('package.json')
-  config.nodespecfiles = ['spec/**/*Spec.js']
+  <% if (package.node) { %>
   config.nodefiles = ['server.js','lib/**/*.js','lib/*.js']
+  config.nodespecfiles = ['spec/**/*Spec.js']
+  <% } else { %>
+  config.nodefiles = []
+  config.nodespecfiles = []
+  <% } %>
+
+  <% if (package.frontend) { %>
   config.browserfiles = ['app/js/**/*.js', 'app/js/*.js']
   config.browserspecfiles = ['app/spec/**/*Spec.js', 'app/spec/*Spec.js']
+  <% } else { %>
+  config.browserfiles = []
+  config.browserspecfiles = []
+  <% } %>
   config.e2efiles = ['e2e/**/*Spec.js', 'e2e/*Spec.js']
   config.backendFiles = config.nodespecfiles.concat(config.nodefiles)
   config.frontendFiles = config.browserfiles.concat(config.browserspecfiles)
@@ -31,7 +42,7 @@ module.exports = function(grunt) {
       }
     },
     options: {
-      ignore: ['app/**', '<%%= specfiles %>', '.grunt/**']
+      ignore: ['app/**', '<%%= allSpecFiles %>', '.grunt/**']
     }
   }
 
@@ -41,7 +52,7 @@ module.exports = function(grunt) {
 
   config.spec = {
     default: {
-      specs: '<%%= specfiles %>',
+      specs: config.allSpecFiles,
       isVerbose: true,
       showColors: true,
       includeStackTrace: true,
@@ -63,7 +74,7 @@ module.exports = function(grunt) {
     main: {
       files: {
         'app/assets/bundle.js': 'app/js/main.js',
-        'app/spec/specBundle.js': '<%%= browserspecfiles %>'
+        'app/spec/specBundle.js': config.browserSpecFiles
       },
       options: {
         debug: true,
@@ -93,15 +104,18 @@ module.exports = function(grunt) {
   }
 
   config.watch = {
+  <% if (package.node) { %>
     nodeSpecs: {
       files: config.backendFiles,
       tasks: 'spec'
     },
+  <% } %>
+  <% if (package.frontend) { %>
     frontEnd: {
       files:  config.frontendFiles,
       tasks: ['browserify', 'jasmine']
     },
-
+  <% } %>
     lint: {
       files: config.allJS,
       tasks: 'eslint'
@@ -123,7 +137,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon')
   grunt.loadNpmTasks('grunt-node-inspector')
   grunt.loadNpmTasks('grunt-concurrent')
-  
+
   grunt.registerMultiTask('spec', 'Run node jasmine specs', function(){
     var done = this.async();
     var jasmineLib = require('minijasminenode');
