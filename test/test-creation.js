@@ -28,7 +28,8 @@ describe('polunware generator', function () {
       '.tern-project',
       'Gruntfile.js',
       '.gitignore',
-      'server.js'
+      'server.js',
+      '.travis.yml'
     ];
 
     helpers.mockPrompt(this.app, {
@@ -36,7 +37,7 @@ describe('polunware generator', function () {
       packageName: 'testpackage',
       licence: 'ISC',
       environments: [
-        'node', 
+        'node',
         'frontend'
       ]
     })
@@ -52,7 +53,7 @@ describe('polunware generator', function () {
       packageName: 'testpackage',
       licence: 'ISC',
       environments: [
-        'node', 
+        'node',
         'frontend'
       ]
     })

@@ -1,6 +1,6 @@
 'use strict'
 var util = require('util'),
-    path = require('path'), 
+    path = require('path'),
     yeoman = require('yeoman-generator'),
     chalk = require('chalk'),
     spawn = require('child_process').spawn,
@@ -87,6 +87,7 @@ var PolunwareGenerator = yeoman.generators.Base.extend({
     this.copy('eslint.json', 'config/eslint.json')
     this.copy('eslint-specs.json', 'config/eslint-specs.json')
     this.copy('tern-project', '.tern-project')
+    this.copy('travis.yml', '.travis.yml')
     this.copy('gitignore', '.gitignore')
   }
 });
